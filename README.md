@@ -1,1 +1,11 @@
-# Consensus-algorithm
+## Simulation with Drone Leader
+Observing the flocks of birds that fly it can be seen that they move in a group like a cloud and many scholars have wondered how they manage to coordinate in this way. Even some species of migratory birds, such as the hermit ibis, fly forming a "V".
+There is a sort of leader of the flock whose structure is followed by the other components. Even in the flight of drones, the presence of one or more leaders can be useful, for example, if we wanted to check the progress of a set of drones, it would be much more convenient to control a single drone whose attitude the others conform to (through consent ), than check them one by one separately!
+
+And in our case how can we get the presence of a leader to guide the remaining drones? It is very simple, just reset the entire row of the W matrix corresponding to the leading drone. In this way (the leader is the i-th drone): 
+- the values w (i, j) = 0, ∀j ∈ [1, n], i.e. the drone i (leader) does not change its status according to states of other drones, thus keeping their state unchanged. 
+- on the contrary, the other n - 1 drones will be able to access the state of the leading drone, modifying their state accordingly and reaching that of the drone as a consensus structure leader.
+
+## Simulation of a physical case
+
+We can also give the distribution of weights within the matrix W a physical meaning. What we considered in this project was a consensus in the rotational and non-translational order, i.e. the states we considered are points in SO (3) (i.e. special orthogonal matrices) and not positions in space (R3). The consensus towards a single point of space was not the object of our studies, however it is possible to represent the situation in which the drones approach a single position in space, and then move away from it, creating a matrix of weights, whose values oscillate sinusoidally over time. In this way we will have the weights of the matrix W, which in a half-period of the sinusoid will increase, indicating the situation in which the drones approaching each other spatially are able to communicate better because they are less distant from each other, while in the other half-period will decrease due to the subsequent removal of the drones.
